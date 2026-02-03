@@ -64,14 +64,7 @@ GO
 
 CREATE VIEW gold.fat_sales AS
 SELECT 
-	    sl.sls_sales,
-		sl.sls_quantity,
-		sl.sls_price,
-		sl.sls_ord_num,
-		sl.sls_order_dt,
-		sl.sls_ship_dt,
-		sl.sls_due_dt,
-		c.customer_key,
+	    c.customer_key,
 		c.cst_firstname,
 		c.cst_lastname,
 		c.bdate,
@@ -83,10 +76,18 @@ SELECT
 		p.prd_line,
 		p.prd_nm,
 		p.prd_start_dt,
-		p.prd_end_dt
+		p.prd_end_dt,
+	    sl.sls_sales,
+		sl.sls_quantity,
+		sl.sls_price,
+		sl.sls_ord_num,
+		sl.sls_order_dt,
+		sl.sls_ship_dt,
+		sl.sls_due_dt		
   FROM silver.sales_details_info AS sl
   LEFT JOIN gold.dim_customer AS c
   ON sl.sls_cust_id = c.cst_id
   LEFT JOIN gold.dim_product p
   ON sl.sls_prd_key = p.prd_key;
   GO
+
